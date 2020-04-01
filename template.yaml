@@ -5,17 +5,13 @@ Description: >
 
   Sample SAM Template for lambda-ses
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
-
 Parameters:
   EMAIL:
     Type: String
     Description: SES verified e-mail address to send and receive
-#    Default:
-
 Resources:
   LambdaSESFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
