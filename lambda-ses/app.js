@@ -28,32 +28,32 @@ exports.handler = (event, context, callback) => {
         },
         Source: email
     };
-
-    callback(null, {
-        statusCode: '200',
-        body: JSON.stringify({
-            message: 'The time is: ' + currentTime.toString(),
-            // err: err,
-            // data: data
-        })
-    });
     //
-    // ses.sendEmail(params, function (err, data) {
-    //     callback(null, {
-    //         statusCode: '200',
-    //         body: JSON.stringify({
-    //             message: 'The time is: ' + currentTime.toString(),
-    //             err: err,
-    //             data: data
-    //         })
-    //     });
-    //
-    //     if (err) {
-    //         console.log(err);
-    //         context.fail(err);
-    //     } else {
-    //         console.log(data);
-    //         context.succeed(event);
-    //     }
+    // callback(null, {
+    //     statusCode: '200',
+    //     body: JSON.stringify({
+    //         message: 'The time is: ' + currentTime.toString(),
+    //         // err: err,
+    //         // data: data
+    //     })
     // });
+    // //
+    ses.sendEmail(params, function (err, data) {
+        callback(null, {
+            statusCode: '200',
+            body: JSON.stringify({
+                message: 'The time is: ' + currentTime.toString(),
+                err: err,
+                data: data
+            })
+        });
+
+        if (err) {
+            console.log(err);
+            context.fail(err);
+        } else {
+            console.log(data);
+            context.succeed(event);
+        }
+    });
 };

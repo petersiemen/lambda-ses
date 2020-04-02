@@ -19,6 +19,15 @@ Resources:
       CodeUri: lambda-ses/
       Handler: app.handler
       Runtime: nodejs12.x
+      Policies:
+        - Statement:
+            - Sid: SendEmails
+              Effect: Allow
+              Action:
+                - ses:SendEmail
+                - ses:SendRawEmail
+              Resource: '*'
+
       Environment:
         Variables:
           EMAIL: !Ref EMAIL
