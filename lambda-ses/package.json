@@ -7,13 +7,12 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0"
+    "aws-xray-sdk": "^2.5.0"
   },
   "scripts": {
     "test": "mocha tests/unit/"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "aws-sdk": "^2.649.0"
+    "chai": "^4.2.0"
   }
 }
