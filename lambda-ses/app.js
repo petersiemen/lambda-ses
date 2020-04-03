@@ -1,5 +1,5 @@
-var aws = require('aws-sdk');
-var ses = new aws.SES({region: 'eu-central-1'});
+var AWS = require('aws-sdk');
+var SES = new AWS.SES({region: 'eu-central-1'});
 
 exports.handler = (event, context, callback) => {
 
@@ -9,9 +9,7 @@ exports.handler = (event, context, callback) => {
     console.log(event);
     var body = JSON.parse(event.body);
     console.log('body:', body);
-    // var subject = body.subject;
-    // var message = body.message;
-    //
+
     var params = {
         Destination: {
             ToAddresses: [email]
@@ -19,40 +17,35 @@ exports.handler = (event, context, callback) => {
         Message: {
             Body: {
                 Text: {
-                    Data: "Test"
+                    Charset: 'UTF-8',
+                    Data: body.message
                 }
             },
             Subject: {
-                Data: "bla blah"
+                Charset: 'UTF-8',
+                Data: body.subject
             }
         },
-        Source: email
+        Source: email,
+        ReplyToAddresses: [
+            body.email
+        ]
     };
-    //
-    // callback(null, {
-    //     statusCode: '200',
-    //     body: JSON.stringify({
-    //         message: 'The time is: ' + currentTime.toString(),
-    //         // err: err,
-    //         // data: data
-    //     })
-    // });
-    // //
-    ses.sendEmail(params, function (err, data) {
-        callback(null, {
-            statusCode: '200',
-            body: JSON.stringify({
-                message: 'The time is: ' + currentTime.toString(),
-                err: err,
-                data: data
-            })
-        });
-
+    
+    SES.sendEmail(params, function (err, data) {
         if (err) {
             console.log(err);
+            callback(null, {
+                statusCode: '200',
+                body: JSON.stringify(err)
+            });
             context.fail(err);
         } else {
             console.log(data);
+            callback(null, {
+                statusCode: '200',
+                body: JSON.stringify(data)
+            });
             context.succeed(event);
         }
     });
