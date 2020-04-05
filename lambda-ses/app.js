@@ -18,7 +18,7 @@ exports.handler = (event, context, callback) => {
             Body: {
                 Text: {
                     Charset: 'UTF-8',
-                    Data: body.message
+                    Data: 'message from : ' + body.name + '\n\n' + body.message
                 }
             },
             Subject: {
