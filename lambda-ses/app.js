@@ -31,7 +31,7 @@ exports.handler = (event, context, callback) => {
             body.email
         ]
     };
-    
+
     SES.sendEmail(params, function (err, data) {
         if (err) {
             console.log(err);
