@@ -1,5 +1,6 @@
 var AWS = require('aws-sdk');
-var SES = new AWS.SES({region: 'eu-central-1'});
+// var SES = new AWS.SES({region: 'eu-central-1'});
+var SES = new AWS.SES({region: 'eu-west-1'});
 
 exports.handler = (event, context, callback) => {
 
