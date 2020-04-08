@@ -21,6 +21,7 @@ Resources:
       Handler: app.handler
       Runtime: nodejs12.x
       Policies:
+        - AWSXRayDaemonWriteAccess
         - Statement:
             - Sid: SendEmails
               Effect: Allow
