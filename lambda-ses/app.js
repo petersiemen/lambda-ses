@@ -36,9 +36,9 @@ exports.handler = (event, context, callback) => {
 
     SES.sendEmail(params, function (err, data) {
         if (err) {
-            console.log(err);
+            console.error(err);
             callback(null, {
-                statusCode: '200',
+                statusCode: '500',
                 body: JSON.stringify(err)
             });
             context.fail(err);
