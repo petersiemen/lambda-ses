@@ -20,6 +20,7 @@ Resources:
       CodeUri: lambda-ses/
       Handler: app.handler
       Runtime: nodejs12.x
+      Tracing: PassThrough
       Policies:
         - AWSXRayDaemonWriteAccess
         - Statement:
