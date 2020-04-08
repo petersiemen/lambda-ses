@@ -1,5 +1,6 @@
 var AWS = require('aws-sdk');
-// var SES = new AWS.SES({region: 'eu-central-1'});
+// since SES mail receiving is only available in eu-west-1 (lambda-mail-forwarder) I send mails
+// in eu-west-1 as well
 var SES = new AWS.SES({region: 'eu-west-1'});
 
 exports.handler = (event, context, callback) => {
@@ -35,9 +36,9 @@ exports.handler = (event, context, callback) => {
 
     SES.sendEmail(params, function (err, data) {
         if (err) {
-            console.log(err);
+            console.error(err);
             callback(null, {
-                statusCode: '200',
+                statusCode: '500',
                 body: JSON.stringify(err)
             });
             context.fail(err);
